@@ -133,6 +133,10 @@ truffle test
 0xe44a5aCF291B9cD923316ed1c1C9CFa289eACE21
 ```
 
+## View on the distributed web
+
+https://ipfs.io/ipfs/bciqjxwancs6ta6elbmqegs56wegdvthnin4zet6n4l5qndmxlwyrruq/
+
 ## Challenge 001 (0.025ETH Reward Bounty):
 
 https://adventureth.com/0xd77018c3f8a98f399cfbf86227b1f5c654edb746dce5b3892d719915983f1b26
