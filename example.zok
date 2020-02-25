@@ -1,0 +1,12 @@
+import "hashes/sha256/512bitPacked" as sha256packed
+
+def main(private field a, private field b, private field c, private field d, field address) -> (field):
+  // Hash 512 bits of data split across 4x 128-bit words.
+	field[2] h = sha256packed([a, b, c, d])
+
+	// Validate the expected hash.
+	h[0] == 155536738467413483730103824809808066974
+	h[1] == 190756806634544106798836275600379941952
+
+	// Return our desired reciepent
+	return address
