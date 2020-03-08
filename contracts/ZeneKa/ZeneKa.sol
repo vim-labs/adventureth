@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.3;
 
 import "./BN256G2.sol";
 import "./Pairing.sol";
@@ -21,6 +21,7 @@ contract ZeneKa {
 
     mapping(bytes32 => bytes32) _idToCommit;
     mapping(bytes32 => address) _proofHashToProver;
+    mapping(bytes32 => uint256) _proofHashToBlock;
     mapping(bytes32 => bool) _proofHashToProven;
     mapping(bytes32 => mapping(address => uint256[])) _idToProverToInput;
     mapping(bytes32 => mapping(address => bool)) _idToProverToVerified;
@@ -49,5 +50,21 @@ contract ZeneKa {
     {
         require(_idToProverToVerified[_id][_prover], "Unverified");
         return _idToProverToInput[_id][_prover];
+    }
+
+    function prover(bytes32 _proofHash)
+        public
+        view
+        returns (address commitProver)
+    {
+        return _proofHashToProver[_proofHash];
+    }
+
+    function commitBlock(bytes32 _proofHash)
+        public
+        view
+        returns (uint256 commitBlockNumber)
+    {
+        return _proofHashToBlock[_proofHash];
     }
 }

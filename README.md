@@ -66,9 +66,6 @@ solve(bytes32 _id, ...proof)
 // Add rewards to level
 addReward(bytes32 _id) payable
 
-// Add batch rewards to levels
-addRewards(bytes32[] _ids, uint256[] _amts) payable
-
 // Transfer reward to a new level (requires isOperator)
 transfer(bytes32 _from, bytes32 _to)
 
@@ -130,7 +127,7 @@ truffle test
 ## Mainnet address
 
 ```
-0xe44a5aCF291B9cD923316ed1c1C9CFa289eACE21
+0x793f389cc1f7d42fa1f1bba68d16a1e00067cb04
 ```
 
 ## View on the distributed web

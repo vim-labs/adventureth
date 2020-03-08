@@ -1,11 +1,11 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.3;
 
 import "./ZeneKa/ZeneKaG16I.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
 import "../node_modules/@openzeppelin/contracts/ownership/Ownable.sol";
 
 contract Adventureth is ERC721Full, Ownable {
-    address private zeneka_g16_address = 0x599451C385b8Ff0e7E39bCDA0d31Fb795e36B919;
+    address private zeneka_g16_address = 0x0623d81354051244AB716D1b8F14788d2fb03326;
     address payable private _adventureth_operator;
     uint256 private _tokenCount = 0;
     mapping(bytes32 => address) private _idToOperator;
@@ -17,6 +17,7 @@ contract Adventureth is ERC721Full, Ownable {
     mapping(uint256 => bytes32) private _tokenToId;
     mapping(uint256 => address) private _tokenToSolver;
     mapping(bytes32 => uint256) private _idToTotalSolvers;
+    mapping(bytes32 => address) private _proofHashToProver;
     mapping(bytes32 => mapping(uint256 => address)) private _idToSolverIdxToSolver;
     mapping(bytes32 => mapping(address => bool)) private _idToAddressToSolved;
 
@@ -52,25 +53,6 @@ contract Adventureth is ERC721Full, Ownable {
         return _idToReward[_id];
     }
 
-    function addRewards(bytes32[] memory _ids, uint256[] memory _amts)
-        public
-        payable
-    {
-        require(_ids.length == _amts.length, "Unbalanced arrays.");
-        uint256 totalAmt = 0;
-        for (uint256 i; i < _ids.length; i++) {
-            require(_idToSolver[_ids[i]] == address(0), "Already solved.");
-            uint256 amt = _amts[i];
-            require(totalAmt + amt >= totalAmt, "Overflow");
-            totalAmt += amt;
-        }
-        require(totalAmt == msg.value, "Unbalanced arrays.");
-
-        for (uint256 i; i < _ids.length; i++) {
-            _idToReward[_ids[i]] += _amts[i];
-        }
-    }
-
     function addReward(bytes32 _id) public payable {
         require(_idToSolver[_id] == address(0), "Already solved.");
 
@@ -90,10 +72,19 @@ contract Adventureth is ERC721Full, Ownable {
         return _idToIPFS[_id];
     }
 
+    function prover(bytes32 _proofHash)
+        public
+        view
+        returns (address commitProver)
+    {
+        return _proofHashToProver[_proofHash];
+    }
+
     function commit(bytes32 _id, bytes32 _proofHash) public {
         require(_idToOperator[_id] != address(0), "Not found.");
         ZeneKaG16I zeneKaG16 = ZeneKaG16I(zeneka_g16_address);
         zeneKaG16.commitG16(_id, _proofHash);
+        _proofHashToProver[_proofHash] = msg.sender;
     }
 
     function exists(bytes32 _id) public view returns (bool idExists) {
@@ -146,12 +137,20 @@ contract Adventureth is ERC721Full, Ownable {
     ) public returns (bool didSolve) {
         require(_idToOperator[_id] != address(0), "Not found.");
         ZeneKaG16I zeneKaG16 = ZeneKaG16I(zeneka_g16_address);
-        require(_input.length > 0 && _input[0] == uint256(address(this)));
+        require(
+            _input.length > 0 && _input[0] == uint256(address(this)),
+            "Invalid public input"
+        );
+        bytes32 proofHash = keccak256(abi.encodePacked(_a, _b, _c, _input));
+        address payable commitProver = address(
+            uint160(_proofHashToProver[proofHash])
+        );
+        require(commitProver == msg.sender, "Unauthorized.");
         bool _didSolve = zeneKaG16.proveG16(_id, _a, _b, _c, _input);
 
         if (_didSolve) {
             if (_idToSolver[_id] == address(0)) {
-                _idToSolver[_id] = msg.sender;
+                _idToSolver[_id] = commitProver;
 
                 if (_idToReward[_id] > 0) {
                     uint256 _fee = _idToReward[_id] / 40;
@@ -159,18 +158,17 @@ contract Adventureth is ERC721Full, Ownable {
 
                     if (_fee > 0) _adventureth_operator.transfer(_fee);
                     _idToReward[_id] = 0;
-                    msg.sender.transfer(_reward);
+                    commitProver.transfer(_reward);
                 }
             }
 
-            if (!_idToAddressToSolved[_id][msg.sender]) {
-                _mintToken(msg.sender, _id);
-                _idToSolverIdxToSolver[_id][_idToTotalSolvers[_id]] = msg
-                    .sender;
+            if (!_idToAddressToSolved[_id][commitProver]) {
+                _mintToken(commitProver, _id);
+                _idToSolverIdxToSolver[_id][_idToTotalSolvers[_id]] = commitProver;
                 _idToTotalSolvers[_id] += 1;
             }
 
-            _idToAddressToSolved[_id][msg.sender] = true;
+            _idToAddressToSolved[_id][commitProver] = true;
         }
 
         return _didSolve;

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.3;
 
 import "./ZeneKa.sol";
 
@@ -100,6 +100,7 @@ contract ZeneKaG16 is ZeneKa {
             _proofHashToProver[_proofHash] != address(0)
         ) return false;
         _proofHashToProver[_proofHash] = msg.sender;
+        _proofHashToBlock[_proofHash] = block.number;
         emit Commit(_id, _proofHash, msg.sender);
         return true;
     }
@@ -115,7 +116,8 @@ contract ZeneKaG16 is ZeneKa {
         if (_proofHashToProven[proofHash]) return true;
         if (
             !_idToVkParamsG16[_id].registered ||
-            _proofHashToProver[proofHash] != msg.sender
+            _proofHashToProver[proofHash] != msg.sender ||
+            block.number <= _proofHashToBlock[proofHash]
         ) return false;
 
         VerifyingKeyG16 memory vk = _verifyingKeyG16(_id);

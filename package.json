@@ -1,0 +1,29 @@
+{
+  "name": "adventureth",
+  "version": "1.0.0",
+  "description": "<p align=\"center\"> \t<img src=\"https://user-images.githubusercontent.com/25379378/75189749-b4ea6500-5703-11ea-91d9-529ef4264dbe.png\" width=\"640\" alt=\"Adventureth Logo\" /> \t<p align=\"center\"> \t\tAdventures with Ethereum zkSNARKs. \t</p> </p>",
+  "main": "truffle-config.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "sol-merger": "^2.0.1",
+    "web3": "^1.2.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "merge": "sol-merger \"./contracts/**/*.sol\" ./merged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vim-labs/adventureth.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vim-labs/adventureth/issues"
+  },
+  "homepage": "https://github.com/vim-labs/adventureth#readme"
+}

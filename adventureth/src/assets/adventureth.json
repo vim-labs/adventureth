@@ -1,7 +1,6 @@
 [
   {
     "inputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -100,7 +99,6 @@
     "type": "event"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -115,12 +113,10 @@
     ],
     "name": "approve",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "address",
@@ -136,12 +132,10 @@
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "baseURI",
     "outputs": [
@@ -151,12 +145,10 @@
         "type": "string"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -172,12 +164,10 @@
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "address",
@@ -198,12 +188,10 @@
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "isOwner",
     "outputs": [
@@ -213,12 +201,10 @@
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "name",
     "outputs": [
@@ -228,12 +214,10 @@
         "type": "string"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "owner",
     "outputs": [
@@ -243,12 +227,10 @@
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -264,21 +246,17 @@
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -298,12 +276,10 @@
     ],
     "name": "safeTransferFrom",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -328,16 +304,14 @@
     ],
     "name": "safeTransferFrom",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
-        "name": "to",
+        "name": "operator",
         "type": "address"
       },
       {
@@ -348,12 +322,10 @@
     ],
     "name": "setApprovalForAll",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes4",
@@ -369,12 +341,10 @@
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "symbol",
     "outputs": [
@@ -384,12 +354,10 @@
         "type": "string"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -405,12 +373,10 @@
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "address",
@@ -431,12 +397,10 @@
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -452,12 +416,10 @@
         "type": "string"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "totalSupply",
     "outputs": [
@@ -467,12 +429,10 @@
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -492,12 +452,10 @@
     ],
     "name": "transferFrom",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -507,12 +465,10 @@
     ],
     "name": "transferOwnership",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address payable",
@@ -522,12 +478,10 @@
     ],
     "name": "updateAdventurethOperator",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -537,12 +491,10 @@
     ],
     "name": "updateZenekaG16Address",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -557,12 +509,10 @@
     ],
     "name": "updateOperator",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -578,12 +528,10 @@
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -599,32 +547,10 @@
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "internalType": "bytes32[]",
-        "name": "_ids",
-        "type": "bytes32[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "_amts",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "addRewards",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -634,12 +560,10 @@
     ],
     "name": "addReward",
     "outputs": [],
-    "payable": true,
     "stateMutability": "payable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -654,12 +578,10 @@
     ],
     "name": "setIPFS",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -675,12 +597,29 @@
         "type": "string"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_proofHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "prover",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "commitProver",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "bytes32",
@@ -695,12 +634,10 @@
     ],
     "name": "commit",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -716,12 +653,10 @@
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -731,12 +666,10 @@
     ],
     "name": "withdraw",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -752,12 +685,10 @@
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -778,12 +709,10 @@
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -799,12 +728,10 @@
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -825,12 +752,10 @@
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -866,12 +791,10 @@
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -917,12 +840,10 @@
         "type": "bool"
       }
     ],
-    "payable": true,
     "stateMutability": "payable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -937,12 +858,10 @@
     ],
     "name": "transfer",
     "outputs": [],
-    "payable": true,
     "stateMutability": "payable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -958,12 +877,10 @@
         "type": "bytes32"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes32",
@@ -979,12 +896,10 @@
         "type": "bytes32"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -1000,12 +915,10 @@
         "type": "bytes32"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -1021,7 +934,6 @@
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
     "type": "function"
   }

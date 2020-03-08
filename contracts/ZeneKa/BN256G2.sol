@@ -4,7 +4,7 @@
  * @dev Homepage: https://github.com/musalbas/solidity-BN256G2
  */
 
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.3;
 
 library BN256G2 {
     uint256 internal constant FIELD_MODULUS = 0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47;

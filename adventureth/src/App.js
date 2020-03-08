@@ -20,7 +20,7 @@ import abi_adventureth from "./assets/adventureth.json";
 import Web3 from "web3";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
-const adventurethAddress = "0xe44a5aCF291B9cD923316ed1c1C9CFa289eACE21";
+const adventurethAddress = "0x793f389cc1f7d42fa1f1bba68d16a1e00067cb04";
 
 const useStyles = makeStyles(theme => ({
   field: {

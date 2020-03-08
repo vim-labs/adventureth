@@ -72,19 +72,6 @@ contract("Adventureth", accounts => {
     assert(web3.utils.fromWei(reward, "ether") === "1");
   });
 
-  it("should add batch rewards", async () => {
-    await adventureth.addRewards(
-      [id1, id2],
-      [web3.utils.toWei("1", "ether"), web3.utils.toWei("2", "ether")],
-      {
-        from: k0,
-        value: web3.utils.toWei("3", "ether")
-      }
-    );
-    const reward = (await adventureth.reward(id1)).toString();
-    assert(web3.utils.fromWei(reward, "ether") === "2");
-  });
-
   it("should withdraw a reward", async () => {
     await adventureth.withdraw(id1, {
       from: k0
@@ -119,7 +106,7 @@ contract("Adventureth", accounts => {
   });
 
   it("should commit a proofHash", async () => {
-    await adventureth.commit(id1, proofHash1);
+    await adventureth.commit(id1, proofHash1, { from: k0 });
   });
 
   it("should solve a challenge", async () => {
@@ -139,45 +126,24 @@ contract("Adventureth", accounts => {
     assert.isNotTrue(solvedK1);
   });
 
-  it("should solve a challenge from k1", async () => {
-    await adventureth.solve(id1, ...proof1, { from: k1 });
-  });
-
-  it("should return the updated solve status", async () => {
-    const solvedK0 = await adventureth.solved(id1, k0);
-    assert.isTrue(solvedK0);
-
-    const solvedK1 = await adventureth.solved(id1, k1);
-    assert.isTrue(solvedK1);
-  });
-
   it("should return the total solvers", async () => {
     const solvers = (await adventureth.solvers(id1)).toString();
-    assert(solvers === "2");
+    assert(solvers === "1");
   });
 
   it("should return the solver by index", async () => {
     const solverK0 = await adventureth.solverByIndex(id1, 0);
     assert(solverK0 === k0);
-
-    const solverK1 = await adventureth.solverByIndex(id1, 1);
-    assert(solverK1 === k1);
   });
 
   it("should mint NFTs", async () => {
     const totalSupply = (await adventureth.totalSupply.call()).toNumber();
-    assert(totalSupply == 2);
+    assert(totalSupply == 1);
 
     const tkn1 = await adventureth.tokenToId(1);
     assert(tkn1 == id1);
 
-    const tkn2 = await adventureth.tokenToId(2);
-    assert(tkn2 == id1);
-
     const tkn1Solver = await adventureth.tokenToSolver(1);
     assert(tkn1Solver == k0);
-
-    const tkn2Solver = await adventureth.tokenToSolver(2);
-    assert(tkn2Solver == k1);
   });
 });
