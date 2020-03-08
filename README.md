@@ -132,7 +132,7 @@ truffle test
 
 ## View on the distributed web
 
-https://ipfs.io/ipfs/bciqjxwancs6ta6elbmqegs56wegdvthnin4zet6n4l5qndmxlwyrruq/
+https://ipfs.io/ipfs/QmavkedsovxmUNXVY2yiWAigM6T2wr6wiEKEMFLUMxAif2/
 
 ## Challenge 001 (0.025ETH Reward Bounty):
 
