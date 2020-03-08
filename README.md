@@ -5,6 +5,9 @@
 	</p>
 </p>
 
+Exclusive proofs of knowledge with ZeneKa zkSNARKs on Medium.com:
+https://medium.com/@iRyanBell/exclusive-proofs-of-knowledge-with-zeneka-zksnarks-8d95bffeec88
+
 ## Adding a challenge:
 
 New challenges are added as G16 zkSNARKs with:
@@ -134,6 +137,12 @@ truffle test
 
 https://ipfs.io/ipfs/QmavkedsovxmUNXVY2yiWAigM6T2wr6wiEKEMFLUMxAif2/
 
-## Challenge 001 (0.025ETH Reward Bounty):
+## Challenge 001 (0.025ETH Reward Bounty) [SOLVED]:
 
+Challenge:
 https://adventureth.com/0xd77018c3f8a98f399cfbf86227b1f5c654edb746dce5b3892d719915983f1b26
+
+Puzzle:
+![QmV1aymbknLTtrZX3wKex9CfbLcGiwPgqTmUWx1zAvCf9j](https://user-images.githubusercontent.com/25379378/76173434-dfeda380-615c-11ea-805c-a3f79ba86aaa.jpg)
+
+Solution: `こんにちは`
