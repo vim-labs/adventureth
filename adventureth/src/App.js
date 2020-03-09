@@ -159,7 +159,9 @@ export default () => {
   const [prev, setPrev] = useState("0");
   const [next, setNext] = useState(null);
   const [tab, setTab] = useState(0);
-  const [generated, setGenerated] = useState("");
+  const [generatedVK, setGeneratedVK] = useState("");
+  const [generatedProofHash, setGeneratedProofHash] = useState("");
+  const [generatedProof, setGeneratedProof] = useState("");
   const [loadingGenerator, setLoadingGenerator] = useState(false);
   const [loadingTx, setLoadingTx] = useState(false);
   const [id, setId] = useState("");
@@ -292,7 +294,7 @@ export default () => {
       const { vk: vkRaw } = keypair;
       const vk = vkFormat(vkRaw);
       setId(web3.utils.soliditySha3(...vk.flat(3)));
-      setGenerated(JSON.stringify(vk, null, 2));
+      setGeneratedVK(JSON.stringify(vk, null, 2));
       setLoadingGenerator(false);
     });
   };
@@ -335,7 +337,18 @@ export default () => {
       const p = [...proof_proof, proof_inputs];
       const proofHash = web3.utils.soliditySha3(...p.flat(3));
 
-      setGenerated(proofHash);
+      // Confirm commit has been recorded into the ledger.
+      adventurethContract.methods
+        .prover(generatedProofHash)
+        .call({ from: k0 })
+        .then(res => {
+          if (res === k0) {
+            setGeneratedProofHash(proofHash);
+          } else {
+            console.error("Missing commit.");
+          }
+        });
+
       setLoadingGenerator(false);
     });
   };
@@ -374,8 +387,10 @@ export default () => {
       const proof_proof = Object.values(proof.proof);
       const proof_inputs = Object.values(proof.inputs);
       const p = toUintArr([...proof_proof, proof_inputs]);
+      const proofHash = web3.utils.soliditySha3(...p.flat(3));
 
-      setGenerated(JSON.stringify(p));
+      setGeneratedProofHash(proofHash);
+      setGeneratedProof(JSON.stringify(p));
       setLoadingGenerator(false);
     });
   };
@@ -397,7 +412,7 @@ export default () => {
 
     let gen = [];
     try {
-      gen = JSON.parse(generated);
+      gen = JSON.parse(generatedVK);
     } catch (err) {
       console.error(err);
     }
@@ -407,7 +422,7 @@ export default () => {
       .send(txParams)
       .on("confirmation", () => {
         setLoadingTx(false);
-        setGenerated("");
+        setGeneratedVK("");
         setSolution("");
       });
   };
@@ -421,11 +436,11 @@ export default () => {
     );
 
     adventurethContract.methods
-      .commit(challengeId, generated)
+      .commit(challengeId, generatedProofHash)
       .send({ from: k0 })
       .on("confirmation", () => {
         setLoadingTx(false);
-        setGenerated("");
+        setGeneratedProofHash("");
         setSolution("");
         setId("");
       });
@@ -440,11 +455,12 @@ export default () => {
     );
 
     adventurethContract.methods
-      .solve(challengeId, ...JSON.parse(generated))
+      .solve(challengeId, ...JSON.parse(generatedProof))
       .send({ from: k0 })
       .on("confirmation", () => {
         setLoadingTx(false);
-        setGenerated("");
+        setGeneratedProof("");
+        setGeneratedProofHash("");
         setSolution("");
         setId("");
       })
@@ -467,9 +483,6 @@ export default () => {
       .setIPFS(challengeId, ipfs)
       .send({ from: k0 })
       .on("confirmation", () => {
-        setLoadingGenerator(false);
-        setGenerated("");
-        setSolution("");
         setId("");
         setTab(0);
       });
@@ -644,7 +657,7 @@ export default () => {
                               placeholder="0x0"
                               label="Proof hash"
                               variant="outlined"
-                              value={generated}
+                              value={generatedProofHash}
                             />
                           </Box>
                           <Box display="flex" alignItems="center" marginTop={2}>
@@ -680,7 +693,10 @@ export default () => {
                                 variant="contained"
                                 color="primary"
                                 disabled={
-                                  loadingTx || !k0 || !challengeId || !generated
+                                  loadingTx ||
+                                  !k0 ||
+                                  !challengeId ||
+                                  !generatedProofHash
                                 }
                                 onClick={handleCommitTx}
                               >
@@ -753,12 +769,22 @@ export default () => {
                           <Box marginTop={2}>
                             <TextField
                               readOnly
+                              fullWidth
+                              placeholder="0x0"
+                              label="Proof hash"
+                              variant="outlined"
+                              value={generatedProofHash}
+                            />
+                          </Box>
+                          <Box marginTop={2}>
+                            <TextField
+                              readOnly
                               multiline
                               fullWidth
                               rows={8}
                               label="Proof"
                               variant="outlined"
-                              value={generated}
+                              value={generatedProof}
                             />
                           </Box>
                           <Box
@@ -790,7 +816,10 @@ export default () => {
                                 variant="contained"
                                 color="primary"
                                 disabled={
-                                  loadingTx || !k0 || !challengeId || !generated
+                                  loadingTx ||
+                                  !k0 ||
+                                  !challengeId ||
+                                  !generatedProof
                                 }
                                 onClick={handleSolveTx}
                               >
@@ -936,7 +965,7 @@ export default () => {
                             rows={8}
                             label="Verification key"
                             variant="outlined"
-                            value={generated}
+                            value={generatedVK}
                           />
                         </Box>
                         <Box marginTop={2}>
@@ -976,7 +1005,7 @@ export default () => {
                               classes={{ root: classes.button }}
                               variant="contained"
                               color="primary"
-                              disabled={loadingTx || !k0 || !id || !generated}
+                              disabled={loadingTx || !k0 || !id || !generatedVK}
                               onClick={handleRegisterTx}
                             >
                               Register
